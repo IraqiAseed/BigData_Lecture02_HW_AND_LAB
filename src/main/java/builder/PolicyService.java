@@ -15,6 +15,8 @@ public class PolicyService {
 
     }
 
+    public static Builder builder() { return new Builder(); }
+
     @Override
     public String toString() {
         return "PolicyService{" +
@@ -25,17 +27,22 @@ public class PolicyService {
                 '}';
     }
 
+
+
     public static class Builder {
+
         private int driverAge;
         private int numberOfAccidence;
         private int driverExperience;
         private int x;
 
 
-        public Builder(int driverAge) {
-            this.driverAge = driverAge;
-        }
+        public Builder() { }
 
+        public Builder driveAge(int driverAge) {
+            this.driverAge = driverAge;
+            return this;
+        }
         public Builder numberOfAccidence(int numberOfAccidence) {
             this.numberOfAccidence = numberOfAccidence;
             return this;
@@ -52,7 +59,7 @@ public class PolicyService {
         }
 
         public PolicyService build() {
-            //TODO validation, should be given ...
+            //TODO validation, should be given ... TODO int to Integer and check Nullity..
             if (driverAge <= 0 || driverAge > 100 ||
                     numberOfAccidence < 0 || driverExperience < 0
                     || x <= 0) {
@@ -63,18 +70,27 @@ public class PolicyService {
     }
 
     public static void main(String[] args) {
+        //TODO - update this tests with unit test
+
+
         //Test 1 - normal case
-        PolicyService ps1;
-        ps1 = new Builder(30).driverExperience(4).numberOfAccidence(3).x(9).build();
+        PolicyService ps1 = PolicyService.builder().driveAge(30).driverExperience(4).numberOfAccidence(3).x(9).build();
         System.out.println(ps1);
 
         //Test 2 - missing a parameter, can be zero
-        PolicyService ps2 = new Builder(30).numberOfAccidence(3).x(9).build();
+        PolicyService ps2 = PolicyService.builder().driveAge(30).numberOfAccidence(3).x(9).build();
         System.out.println(ps2);
 
-        //Test 3 - wrong age parameter
-        PolicyService ps3 = new Builder(0).numberOfAccidence(3).x(9).build();
+        //Test 3
+        PolicyService ps4 = PolicyService.builder().driveAge(30).driverExperience(4).numberOfAccidence(2).x(7).build();
+        System.out.println(ps4);
+
+
+        //Test 4 - wrong age parameter - return exception
+        PolicyService ps3 = PolicyService.builder().driveAge(0).numberOfAccidence(3).x(9).build();
         System.out.println(ps3);
+
+
 
 
         //can make same like this class using lombok.

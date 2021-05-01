@@ -21,12 +21,12 @@ public class MainWhichReadFromFile {
         FileInputStream fis = new FileInputStream(file);
 
 
-        ObjectInputStream oos = new ObjectInputStream(fis);
+        ObjectInputStream ois = new ObjectInputStream(fis);
 
-        Person p1 = (Person) oos.readObject();
+        Person p1 = (Person) ois.readObject();
         System.out.println(p1);
 
-        List list = (List) oos.readObject();
+        List list = (List) ois.readObject();
 
         for (Object o : list) {
             System.out.println(o);
@@ -40,6 +40,7 @@ public class MainWhichReadFromFile {
 
 
         }
+        ois.close();
 
 
     }

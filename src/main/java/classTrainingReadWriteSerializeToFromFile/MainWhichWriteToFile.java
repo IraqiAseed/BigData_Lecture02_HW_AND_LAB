@@ -30,6 +30,6 @@ public class MainWhichWriteToFile {
         oos.writeObject(daniel);
         oos.writeObject(list);
 
-
+        oos.close();
     }
 }
